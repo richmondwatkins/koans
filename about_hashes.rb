@@ -92,10 +92,15 @@ class AboutHashes < Neo::Koan
 
     def test_default_value_is_the_same_object
     hash = Hash.new([])
+    #default value is an empty array
 
-    hash[:one] << "uno"
+    hash[:one] << "uno"  #pushes in "uno"
+    #since the hash has defaulted to an array,
+    #there is no :one, therefore "uno" gets pushed into an array
     hash[:two] << "dos"
 
+    #since there are no keys all of the examples below give back the
+    #default value which is the array which contains "uno" and "dos"
     assert_equal __(["uno", "dos"]), hash[:one]
     assert_equal __(["uno", "dos"]), hash[:two]
     assert_equal __(["uno", "dos"]), hash[:three]
@@ -105,7 +110,7 @@ class AboutHashes < Neo::Koan
 
   def test_default_value_with_block
     hash = Hash.new {|hash, key| hash[key] = [] }
-
+    #as each key is assinged they default to an empty array
     hash[:one] << "uno"
     hash[:two] << "dos"
 
